@@ -5,6 +5,8 @@
 			{
 				"name": "COPY_sqldb_AdlsGen2",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "last_cdc",
@@ -65,7 +67,15 @@
 				"outputs": [
 					{
 						"referenceName": "Parquet_dynamic",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "bronze",
+							"folder": "users",
+							"file": {
+								"value": "@concat(pipeline().parameters.table,'_',variables('current'))",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
@@ -108,6 +118,8 @@
 			{
 				"name": "current",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"secureOutput": false,
