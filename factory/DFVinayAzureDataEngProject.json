@@ -1,9 +1,0 @@
-{
-	"name": "DFVinayAzureDataEngProject",
-	"location": "centralus",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "b6022c2d-1227-4fd8-8adb-fc0f1186d9f6",
-		"tenantId": "6300a312-d1f3-46fa-a8d5-bb3e7458ed6d"
-	}
-}
