@@ -121,7 +121,7 @@
 							"typeProperties": {
 								"ifTrueActivities": [
 									{
-										"name": "Copy data1",
+										"name": "archive_file",
 										"type": "Copy",
 										"dependsOn": [],
 										"policy": {
