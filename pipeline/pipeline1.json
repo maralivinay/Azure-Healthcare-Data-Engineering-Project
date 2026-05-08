@@ -382,7 +382,10 @@
 										"typeProperties": {
 											"source": {
 												"type": "AzureSqlSource",
-												"sqlReaderQuery": "@conact('select * ,''',item().datasource,''' as datasource from ',item().tablename)",
+												"sqlReaderQuery": {
+													"value": "@concat('select * ,''',item().datasource,''' as datasource from ',item().tablename)",
+													"type": "Expression"
+												},
 												"queryTimeout": "02:00:00",
 												"partitionOption": "None"
 											},
@@ -431,7 +434,10 @@
 										"typeProperties": {
 											"source": {
 												"type": "AzureDatabricksDeltaLakeSource",
-												"query": "@concat(\r\n'insert into audit_load_logs(datasource,tablename,numberofrowscopied,watermarkcolumnname,loaddate) values (''',\r\nitem().datasource,\r\n''',''',\r\nitem().tablename,\r\n''',''',\r\nstring(activity('full_load_copy').output.rowsCopied),\r\n''',''',\r\nitem().watermark,\r\n''',''',\r\nutcNow(),\r\n''')'\r\n)"
+												"query": {
+													"value": "@concat(\r\n'insert into audit_load_logs(datasource,tablename,numberofrowscopied,watermarkcolumnname,loaddate) values (''',\r\nitem().datasource,\r\n''',''',\r\nitem().tablename,\r\n''',''',\r\nstring(activity('full_load_copy').output.rowsCopied),\r\n''',''',\r\nitem().watermark,\r\n''',''',\r\nutcNow(),\r\n''')'\r\n)",
+													"type": "Expression"
+												}
 											},
 											"dataset": {
 												"referenceName": "AzureDatabricksDeltaLakeDataset1",
