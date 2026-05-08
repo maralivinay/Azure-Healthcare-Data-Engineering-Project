@@ -211,6 +211,38 @@
 							],
 							"userProperties": [],
 							"typeProperties": {
+								"ifFalseActivities": [
+									{
+										"name": "fetch_logs",
+										"type": "Lookup",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureDatabricksDeltaLakeSource",
+												"query": {
+													"value": "@concat(\n'select coalesce(cast(max(loaddate) as date), ''1900-01-01'') as last_fetched_date from audit_load_logs where datasource=''', \nitem().datasource, \n''' and tablename=''', \nitem().tablename, \n''''\n)",
+													"type": "Expression"
+												}
+											},
+											"dataset": {
+												"referenceName": "AzureDatabricksDeltaLakeDataset1",
+												"type": "DatasetReference",
+												"parameters": {
+													"schema_name": "'aa'",
+													"table_name": "'aa'"
+												}
+											}
+										}
+									}
+								],
 								"ifTrueActivities": [
 									{
 										"name": "full_load_CP",
