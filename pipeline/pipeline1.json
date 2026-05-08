@@ -255,9 +255,16 @@
 										]
 									},
 									{
-										"name": "Lookup1",
+										"name": "insert_logs_full_load",
 										"type": "Lookup",
-										"dependsOn": [],
+										"dependsOn": [
+											{
+												"activity": "full_load_CP",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
 										"policy": {
 											"timeout": "0.12:00:00",
 											"retry": 0,
@@ -265,7 +272,21 @@
 											"secureOutput": false,
 											"secureInput": false
 										},
-										"userProperties": []
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureDatabricksDeltaLakeSource",
+												"query": "@concat(\r\n'insert into audit_load_logs(datasource,tablename,numberofrowscopied,watermarkcolumnname,loaddate) values (''',\r\nitem().datasource,\r\n''',''',\r\nitem().tablename,\r\n''',''',\r\nstring(activity('full_load_copy').output.rowsCopied),\r\n''',''',\r\nitem().watermark,\r\n''',''',\r\nutcNow(),\r\n''')'\r\n)"
+											},
+											"dataset": {
+												"referenceName": "AzureDatabricksDeltaLakeDataset1",
+												"type": "DatasetReference",
+												"parameters": {
+													"schema_name": "'aa'",
+													"table_name": "'aa'"
+												}
+											}
+										}
 									}
 								]
 							}
