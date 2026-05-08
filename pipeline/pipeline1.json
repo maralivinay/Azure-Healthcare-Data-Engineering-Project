@@ -346,7 +346,24 @@
 											"secureOutput": false,
 											"secureInput": false
 										},
-										"userProperties": []
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureDatabricksDeltaLakeSource",
+												"query": {
+													"value": "@concat('insert into audit.load_logs(data-source,tablename,numberofrowscopied,watermarkcolumnname,loaddate) values (''',item().datasource,''',''',item().tablename,''',''',activity('incremental_load_CP').output.rowscopied,''',''',item().watermark,''',''',utcNow(),''')')",
+													"type": "Expression"
+												}
+											},
+											"dataset": {
+												"referenceName": "AzureDatabricksDeltaLakeDataset1",
+												"type": "DatasetReference",
+												"parameters": {
+													"schema_name": "'aa'",
+													"table_name": "'aa'"
+												}
+											}
+										}
 									}
 								],
 								"ifTrueActivities": [
