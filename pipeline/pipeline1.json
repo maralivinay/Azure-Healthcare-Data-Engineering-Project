@@ -262,8 +262,33 @@
 										},
 										"userProperties": [],
 										"typeProperties": {
+											"source": {
+												"type": "AzureSqlSource",
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
 											"enableStaging": false
-										}
+										},
+										"inputs": [
+											{
+												"referenceName": "generic_sql_db_ds",
+												"type": "DatasetReference",
+												"parameters": {
+													"db_name": {
+														"value": "@item().database",
+														"type": "Expression"
+													},
+													"schema_name": {
+														"value": "@split(item().tablename,',')[0]",
+														"type": "Expression"
+													},
+													"table_name": {
+														"value": "@split(item().tablename,',')[1]",
+														"type": "Expression"
+													}
+												}
+											}
+										]
 									},
 									{
 										"name": "insert_logs_inc_load",
