@@ -211,6 +211,10 @@
 							],
 							"userProperties": [],
 							"typeProperties": {
+								"expression": {
+									"value": "@equals(item().loadtype,'Full')",
+									"type": "Expression"
+								},
 								"ifFalseActivities": [
 									{
 										"name": "fetch_logs",
@@ -368,7 +372,7 @@
 								],
 								"ifTrueActivities": [
 									{
-										"name": "full_load_CP",
+										"name": "full_load_copy",
 										"type": "Copy",
 										"dependsOn": [],
 										"policy": {
@@ -417,7 +421,7 @@
 										"type": "Lookup",
 										"dependsOn": [
 											{
-												"activity": "full_load_CP",
+												"activity": "full_load_copy",
 												"dependencyConditions": [
 													"Succeeded"
 												]
