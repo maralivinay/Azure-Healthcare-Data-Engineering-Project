@@ -1,0 +1,10 @@
+{
+	"name": "general_health_care_kv_LS",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://general-health-care-kv.vault.azure.net/"
+		}
+	}
+}
