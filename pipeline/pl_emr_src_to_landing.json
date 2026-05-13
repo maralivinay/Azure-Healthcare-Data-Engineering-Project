@@ -202,6 +202,8 @@
 						{
 							"name": "If Condition2",
 							"type": "IfCondition",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "If Condition1",
@@ -452,6 +454,43 @@
 													"table_name": "'aa'"
 												}
 											}
+										}
+									}
+								]
+							}
+						},
+						{
+							"name": "If Condition3",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "If Condition2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@equals(item().is_active,'1')",
+									"type": "Expression"
+								},
+								"ifTrueActivities": [
+									{
+										"name": "Execute Pipeline1",
+										"type": "ExecutePipeline",
+										"dependsOn": [],
+										"policy": {
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"pipeline": {
+												"referenceName": "pipeline1",
+												"type": "PipelineReference"
+											},
+											"waitOnCompletion": true
 										}
 									}
 								]
