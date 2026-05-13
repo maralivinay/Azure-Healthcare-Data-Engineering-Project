@@ -51,7 +51,8 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"isSequential": true,
+					"isSequential": false,
+					"batchCount": 5,
 					"activities": [
 						{
 							"name": "file_exists",
@@ -487,7 +488,7 @@
 										"userProperties": [],
 										"typeProperties": {
 											"pipeline": {
-												"referenceName": "pipeline1",
+												"referenceName": "pl_copy_from_emr",
 												"type": "PipelineReference"
 											},
 											"waitOnCompletion": true
